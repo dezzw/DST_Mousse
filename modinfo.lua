@@ -7,18 +7,21 @@ version = "0.1"
 forumthread = ""
 
 -- mod icons
-icon_atlas = "modicon.xml"
-icon = "modicon.tex"
+-- icon_atlas = "modicon.xml"
+-- icon = "modicon.tex"
 
 -- mod settings
 -- [TODO] not sure the usage yet
--- dont_starve_compatible = true
--- reign_of_giants_compatible = true
--- shipwrecked_compatible = true
+dst_compatible = false
+dont_starve_compatible = true
+reign_of_giants_compatible = true
+shipwrecked_compatible = true
+hamlet_compatible = false
+
 
 client_only_mod = true
 all_clients_require_mod = false
-api_version = 10
+api_version = 6
 
 -- possible configuration
 configuration_options = {}
