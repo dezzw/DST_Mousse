@@ -1,8 +1,8 @@
 local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
-  -- Don't forget to include your character's custom assets!
-  -- Asset( "ANIM", "anim/dpl.zip" ),
+    Asset( "ANIM", "anim/mousse.zip" ),
+    Asset( "ANIM", "anim/ghost_mousse_build.zip" ),
 }
 
 local prefabs = {

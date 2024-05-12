@@ -10,15 +10,30 @@ Assets = {
 
     Asset( "IMAGE", "images/selectscreen_portraits/mousse.tex" ),
     Asset( "ATLAS", "images/selectscreen_portraits/mousse.xml" ),
-
+	
     Asset( "IMAGE", "images/selectscreen_portraits/mousse_silho.tex" ),
     Asset( "ATLAS", "images/selectscreen_portraits/mousse_silho.xml" ),
-	
+
     Asset( "IMAGE", "bigportraits/mousse.tex" ),
     Asset( "ATLAS", "bigportraits/mousse.xml" ),
 	
-    Asset( "IMAGE", "images/mapicon/minimap.tex" ),
-    Asset( "ATLAS", "images/mapicon/minimap.xml" ),
+    Asset( "IMAGE", "images/map_icons/mousse.tex" ),
+    Asset( "ATLAS", "images/map_icons/mousse.xml" ),
+	
+    Asset( "IMAGE", "images/avatars/avatar_mousse.tex" ),
+    Asset( "ATLAS", "images/avatars/avatar_mousse.xml" ),
+	
+    Asset( "IMAGE", "images/avatars/avatar_ghost_mousse.tex" ),
+    Asset( "ATLAS", "images/avatars/avatar_ghost_mousse.xml" ),
+	
+    Asset( "IMAGE", "images/avatars/self_inspect_mousse.tex" ),
+    Asset( "ATLAS", "images/avatars/self_inspect_mousse.xml" ),
+	
+    Asset( "IMAGE", "images/names_mousse.tex" ),
+    Asset( "ATLAS", "images/names_mousse.xml" ),
+	
+    Asset( "IMAGE", "images/names_gold_mousse.tex" ),
+    Asset( "ATLAS", "images/names_gold_mousse.xml" ),
 }
 
 AddMinimapAtlas("images/mapicon/minimap.xml")

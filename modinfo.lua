@@ -11,16 +11,15 @@ forumthread = ""
 -- icon = "modicon.tex"
 
 -- mod settings
--- [TODO] not sure the usage yet
-dst_compatible = false
+dst_compatible = true
 dont_starve_compatible = true
 reign_of_giants_compatible = true
 shipwrecked_compatible = true
-hamlet_compatible = false
+-- hamlet_compatible = true
 
 
-client_only_mod = true
-all_clients_require_mod = false
+-- client_only_mod = true
+all_clients_require_mod = true
 api_version = 6
 
 -- possible configuration
