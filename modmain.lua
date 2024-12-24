@@ -1,76 +1,76 @@
-GLOBAL.SAMANSHA_ENVIRONMENT = SAMANSHA_ENVIRONMENT
-if SAMANSHA_ENVIRONMENT == "DEV" then
-    local sa_test = require("sa_test")
-    GLOBAL.SA_TEST = require("sa_test")
-end
 PrefabFiles = {
-	"esctemplate",
-	"esctemplate_none",
+	"mousse",
+	"mousse_armor",
+	"catchest"
 }
 
 Assets = {
-    Asset( "IMAGE", "images/saveslot_portraits/esctemplate.tex" ),
-    Asset( "ATLAS", "images/saveslot_portraits/esctemplate.xml" ),
+	Asset( "IMAGE", "images/saveslot_portraits/mousse.tex" ),
+	Asset( "ATLAS", "images/saveslot_portraits/mousse.xml" ),
 
-    Asset( "IMAGE", "images/selectscreen_portraits/esctemplate.tex" ),
-    Asset( "ATLAS", "images/selectscreen_portraits/esctemplate.xml" ),
+	Asset( "IMAGE", "images/selectscreen_portraits/mousse.tex" ),
+	Asset( "ATLAS", "images/selectscreen_portraits/mousse.xml" ),
 	
-    Asset( "IMAGE", "images/selectscreen_portraits/esctemplate_silho.tex" ),
-    Asset( "ATLAS", "images/selectscreen_portraits/esctemplate_silho.xml" ),
+	Asset( "IMAGE", "images/selectscreen_portraits/mousse_silho.tex" ),
+	Asset( "ATLAS", "images/selectscreen_portraits/mousse_silho.xml" ),
 
-    Asset( "IMAGE", "bigportraits/esctemplate.tex" ),
-    Asset( "ATLAS", "bigportraits/esctemplate.xml" ),
+	Asset( "IMAGE", "bigportraits/mousse.tex" ),
+	Asset( "ATLAS", "bigportraits/mousse.xml" ),
 	
-	Asset( "IMAGE", "images/map_icons/esctemplate.tex" ),
-	Asset( "ATLAS", "images/map_icons/esctemplate.xml" ),
+	Asset( "IMAGE", "images/map_icons/mousse.tex" ),
+	Asset( "ATLAS", "images/map_icons/mousse.xml" ),
 	
-	Asset( "IMAGE", "images/avatars/avatar_esctemplate.tex" ),
-    Asset( "ATLAS", "images/avatars/avatar_esctemplate.xml" ),
+	Asset( "IMAGE", "images/avatars/avatar_mousse.tex" ),
+	Asset( "ATLAS", "images/avatars/avatar_mousse.xml" ),
 	
-	Asset( "IMAGE", "images/avatars/avatar_ghost_esctemplate.tex" ),
-    Asset( "ATLAS", "images/avatars/avatar_ghost_esctemplate.xml" ),
+	Asset( "IMAGE", "images/avatars/avatar_ghost_mousse.tex" ),
+	Asset( "ATLAS", "images/avatars/avatar_ghost_mousse.xml" ),
 	
-	Asset( "IMAGE", "images/avatars/self_inspect_esctemplate.tex" ),
-    Asset( "ATLAS", "images/avatars/self_inspect_esctemplate.xml" ),
+	Asset( "IMAGE", "images/avatars/self_inspect_mousse.tex" ),
+	Asset( "ATLAS", "images/avatars/self_inspect_mousse.xml" ),
 	
-	Asset( "IMAGE", "images/names_esctemplate.tex" ),
-    Asset( "ATLAS", "images/names_esctemplate.xml" ),
+	Asset( "IMAGE", "images/names_mousse.tex" ),
+	Asset( "ATLAS", "images/names_mousse.xml" ),
 	
-	Asset( "IMAGE", "images/names_gold_esctemplate.tex" ),
-    Asset( "ATLAS", "images/names_gold_esctemplate.xml" ),
+	Asset( "IMAGE", "images/names_gold_mousse.tex" ),
+	Asset( "ATLAS", "images/names_gold_mousse.xml" ),
+
+	Asset("ANIM", "anim/mousse.zip"),
+	Asset("ANIM", "anim/ghost_mousse_build.zip"),
 }
 
-AddMinimapAtlas("images/map_icons/esctemplate.xml")
+AddMinimapAtlas("images/map_icons/mousse.xml")
 
-local require = GLOBAL.require
-local STRINGS = GLOBAL.STRINGS
+STRINGS.CHARACTERS.MOUSSE = require("speech_mousse")
 
--- The character select screen lines
-STRINGS.CHARACTER_TITLES.esctemplate = "慕斯 -- Mousse"
-STRINGS.CHARACTER_NAMES.esctemplate = "Mousse"
-STRINGS.CHARACTER_DESCRIPTIONS.esctemplate = "*有升级系统\n*初始携带绒球*\n是个可爱猫猫"
-STRINGS.CHARACTER_QUOTES.esctemplate = "\"你好......请、请叫我慕斯......那个，我的手，请您不要盯着我的手看......\""
+-- 修改字符串
+STRINGS.CHARACTER_TITLES.mousse = "慕斯 -- Mousse"
+STRINGS.CHARACTER_NAMES.mousse = "Mousse"
+STRINGS.CHARACTER_DESCRIPTIONS.mousse = "*有升级系统\n*初始携带绒球*\n是个可爱猫猫"
+STRINGS.CHARACTER_QUOTES.mousse = "\"你好......请、请叫我慕斯......那个，我的手，请您不要盯着我的手看......\""
+STRINGS.CHARACTER_SURVIVABILITY.mousse = "Slim"
 
-STRINGS.CHARACTER_SURVIVABILITY.esctemplate = "Slim"
+-- 护甲相关字符串
+STRINGS.NAMES.MOUSSE_ARMOR = "慕斯的特制护甲"
+STRINGS.RECIPE_DESC.MOUSSE_ARMOR = "只有慕斯才能穿戴的护甲"
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.MOUSSE_ARMOR = "我不能穿这个！"
 
--- Custom speech strings
-STRINGS.CHARACTERS.ESCTEMPLATE = require "speech_esctemplate"
+-- 添加配方
+AddRecipe("mousse_armor",
+{
+	Ingredient("log", 4),
+	Ingredient("rope", 2),
+},
+RECIPETABS.SURVIVAL,
+TECH.SCIENCE_ONE,
+nil, -- placer
+nil, -- min_spacing
+nil, -- nounlock
+nil, -- numtogive
+nil, -- builder_tag
+"images/inventoryimages/grassarmor.xml",
+"grassarmor.tex"
+)
 
--- The character's name as appears in-game 
-STRINGS.NAMES.ESCTEMPLATE = "Esc"
-STRINGS.SKIN_NAMES.esctemplate_none = "Esc"
-
--- The skins shown in the cycle view window on the character select screen.
--- A good place to see what you can put in here is in skinutils.lua, in the function GetSkinModes
-local skin_modes = {
-    { 
-        type = "ghost_skin",
-        anim_bank = "ghost",
-        idle_anim = "idle", 
-        scale = 0.75, 
-        offset = { 0, -25 } 
-    },
-}
-
--- Add mod character to mod character list. Also specify a gender. Possible genders are MALE, FEMALE, ROBOT, NEUTRAL, and PLURAL.
-AddModCharacter("esctemplate", "FEMALE", skin_modes)
+-- 添加角色到mod列表
+AddModCharacter("mousse", "FEMALE")
