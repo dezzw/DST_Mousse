@@ -26,7 +26,7 @@ icon = "modicon.tex"
 
 -- The mod's tags displayed on the server list
 server_filter_tags = {
-"character",
+    "character",
 }
 
 --configuration_options = {}
