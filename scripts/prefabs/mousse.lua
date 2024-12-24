@@ -1,21 +1,20 @@
 local MakePlayerCharacter = require "prefabs/player_common"
 
 local assets = {
-    Asset( "ANIM", "anim/mousse.zip" ),
-    Asset( "ANIM", "anim/ghost_mousse_build.zip" ),
+    Asset("SCRIPT", "scripts/prefabs/player_common.lua"),
 }
 
--- 基础数值设定
-TUNING.MOUSSE_HEALTH = 250
+-- Your character's stats
+TUNING.MOUSSE_HEALTH = 150
 TUNING.MOUSSE_HUNGER = 150
-TUNING.MOUSSE_SANITY = 100
+TUNING.MOUSSE_SANITY = 200
 
--- 初始物品
+-- Custom starting inventory
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.MOUSSE = {
-    "flint",
-    "flint",
-    "twigs",
-    "twigs",
+	"flint",
+	"flint",
+	"twigs",
+	"twigs",
 }
 
 local start_inv = {}
@@ -24,16 +23,18 @@ for k, v in pairs(TUNING.GAMEMODE_STARTING_ITEMS) do
 end
 local prefabs = FlattenTree(start_inv, true)
 
--- 复活后的速度修改
+-- When the character is revived from human
 local function onbecamehuman(inst)
-    inst.components.locomotor:SetExternalSpeedMultiplier(inst, "mousse_speed_mod", 1.05)
+	-- Set speed when not a ghost (optional)
+	inst.components.locomotor:SetExternalSpeedMultiplier(inst, "mousse_speed_mod", 1)
 end
 
 local function onbecameghost(inst)
-    inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "mousse_speed_mod")
+	-- Remove speed modifier when becoming a ghost
+   inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "mousse_speed_mod")
 end
 
--- 加载和重生时的处理
+-- When loading or spawning the character
 local function onload(inst)
     inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
     inst:ListenForEvent("ms_becameghost", onbecameghost)
@@ -45,33 +46,38 @@ local function onload(inst)
     end
 end
 
--- 客户端初始化
-local function common_postinit(inst) 
-    inst.MiniMapEntity:SetIcon( "mousse.tex" )
+
+-- This initializes for both the server and client. Tags can be added here.
+local common_postinit = function(inst) 
+	-- Minimap icon
+	inst.MiniMapEntity:SetIcon( "mousse.tex" )
 end
 
--- 服务器端初始化
-local function master_postinit(inst)
-    -- 设置初始物品
+-- This initializes for the server only. Components are added here.
+local master_postinit = function(inst)
+	-- Set starting inventory
     inst.starting_inventory = start_inv[TheNet:GetServerGameMode()] or start_inv.default
-    
-    -- 设置声音
-    inst.soundsname = "wolfgang"
-    
-    -- 设置基础属性
-    inst.components.health:SetMaxHealth(TUNING.MOUSSE_HEALTH)
-    inst.components.hunger:SetMax(TUNING.MOUSSE_HUNGER)
-    inst.components.sanity:SetMax(TUNING.MOUSSE_SANITY)
-    
-    -- 其他属性设置
-    inst.components.combat.damagemultiplier = 1.1
-    inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
-    inst.components.eater.ignoresspoilage = true
-    inst.components.locomotor.walkspeed = 4
-    inst.components.locomotor.runspeed = 7
-    
-    inst.OnLoad = onload
+	
+	-- choose which sounds this character will play
+	inst.soundsname = "willow"
+	
+	-- Uncomment if "wathgrithr"(Wigfrid) or "webber" voice is used
+    --inst.talker_path_override = "dontstarve_DLC001/characters/"
+	
+	-- Stats	
+	inst.components.health:SetMaxHealth(TUNING.MOUSSE_HEALTH)
+	inst.components.hunger:SetMax(TUNING.MOUSSE_HUNGER)
+	inst.components.sanity:SetMax(TUNING.MOUSSE_SANITY)
+	
+	-- Damage multiplier (optional)
+    inst.components.combat.damagemultiplier = 1
+	
+	-- Hunger rate (optional)
+	inst.components.hunger.hungerrate = 1 * TUNING.WILSON_HUNGER_RATE
+	
+	inst.OnLoad = onload
     inst.OnNewSpawn = onload
+	
 end
 
-return MakePlayerCharacter("mousse", prefabs, assets, common_postinit, master_postinit)
+return MakePlayerCharacter("mousse", prefabs, assets, common_postinit, master_postinit, prefabs)

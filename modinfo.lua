@@ -2,24 +2,21 @@
 name = "慕斯"
 description = "一只可爱猫猫"
 author = "Desmond&Arthur"
-version = "0.5" -- This is the version of the template. Change it to your own number.
-version_compatible = version
+version = "0.7" -- This is the version of the template. Change it to your own number.
+
 -- This is the URL name of the mod's thread on the forum; the part after the ? and before the first & in the url
-forumthread = ""
+forumthread = "/files/file/950-extended-sample-character/"
 
 -- This lets other players know if your mod is out of date, update it to match the current version in the game
 api_version = 10
-api_version_dst = 10
-
-priority=0
 
 -- Compatible with Don't Starve Together
 dst_compatible = true
 
 -- Not compatible with Don't Starve
 dont_starve_compatible = false
-reign_of_giants_compatible = true
-shipwrecked_compatible = true
+reign_of_giants_compatible = false
+shipwrecked_compatible = false
 
 -- Character mods are required by all clients
 all_clients_require_mod = true 
@@ -29,9 +26,10 @@ icon = "modicon.tex"
 
 -- The mod's tags displayed on the server list
 server_filter_tags = {
-    "character",
+"character",
 }
 
+--configuration_options = {}
 configuration_options = 
 {
     {
@@ -45,4 +43,3 @@ configuration_options =
         default = "zh_cn", -- 选项的默认值，在选项面板点击Reset时，会把该选项的值设置为默认值
     },
 }
-
