@@ -21,12 +21,12 @@ shipwrecked_compatible = false
 -- Character mods are required by all clients
 all_clients_require_mod = true 
 
-icon_atlas = "modicon.xml"
-icon = "modicon.tex"
+-- icon_atlas = "modicon.xml"
+-- icon = "modicon.tex"
 
 -- The mod's tags displayed on the server list
 server_filter_tags = {
-    "character",
+"character",
 }
 
 --configuration_options = {}
