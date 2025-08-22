@@ -21,8 +21,8 @@ shipwrecked_compatible = false
 -- Character mods are required by all clients
 all_clients_require_mod = true 
 
--- icon_atlas = "modicon.xml"
--- icon = "modicon.tex"
+icon_atlas = "modicon.xml"
+icon = "modicon.tex"
 
 -- The mod's tags displayed on the server list
 server_filter_tags = {
@@ -30,16 +30,16 @@ server_filter_tags = {
 }
 
 --configuration_options = {}
-configuration_options = 
-{
+configuration_options = {
     {
         name = "LANG",
         label = "Language",
+        hover = "选择语言/Select Language",
         options =
         {
-            {description = "简体中文", data = "zh_cn"}, -- dscripttion是显示在设置面板上的值，data是实际对应的取值
-            {description = "English", data = "eng"},--还可以添加hover，是对于选项的描述
+            {description = "简体中文", data = "zh_cn", hover = "使用简体中文"}, 
+            {description = "English", data = "eng", hover = "Use English"}
         },
-        default = "zh_cn", -- 选项的默认值，在选项面板点击Reset时，会把该选项的值设置为默认值
-    },
+        default = "zh_cn"
+    }
 }

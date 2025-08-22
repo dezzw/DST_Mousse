@@ -1,9 +1,3 @@
-local assets = {
-    Asset("ANIM", "anim/armor_grass.zip"),
-    Asset("ATLAS", "images/inventoryimages/mousse_cat_armor.xml"),
-    Asset("IMAGE", "images/inventoryimages/mousse_cat_armor.tex"),
-}
-
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "armor_grass", "swap_body")
 end
@@ -23,7 +17,7 @@ local function fn()
 
     inst.AnimState:SetBank("armor_grass")
     inst.AnimState:SetBuild("armor_grass")
-    inst.AnimState:PlayAnimation("anim")
+    inst.AnimState:PlayAnimation("anim")  -- 确保使用anim
 
     inst:AddTag("armor")
 
@@ -38,6 +32,9 @@ local function fn()
     inst:AddComponent("armor")
     inst.components.armor:InitCondition(500, 0.8)
 
+    -- 添加浮动效果
+    MakeInventoryFloatable(inst, "med", 0.05, 0.68)
+
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
     inst.components.equippable:SetOnEquip(onequip)
@@ -46,4 +43,4 @@ local function fn()
     return inst
 end
 
-return Prefab("mousse_cat_armor", fn, assets)
+return Prefab("mousse_cat_armor", fn)

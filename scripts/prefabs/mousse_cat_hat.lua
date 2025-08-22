@@ -1,9 +1,3 @@
-local assets = {
-    Asset("ANIM", "anim/hat_straw.zip"),  -- 使用草帽的动画
-    Asset("ATLAS", "images/inventoryimages/mousse_cat_hat.xml"),
-    Asset("IMAGE", "images/inventoryimages/mousse_cat_hat.tex"),
-}
-
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_hat", "hat_straw", "swap_hat")
     owner.AnimState:Show("HAT")  -- 显示帽子
@@ -29,20 +23,18 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("hat_straw")
-    inst.AnimState:SetBuild("hat_straw")
+    -- 使用兔子帽动画（确定存在）
+    inst.AnimState:SetBank("rabbithat")
+    inst.AnimState:SetBuild("hat_rabbit")
     inst.AnimState:PlayAnimation("anim")
 
     inst:AddTag("hat")
-
-    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
     inst:AddComponent("inspectable")
-
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.atlasname = "images/inventoryimages/mousse_cat_hat.xml"
 
@@ -50,7 +42,8 @@ local function fn()
     inst:AddComponent("armor")
     inst.components.armor:InitCondition(600, 0.8)  -- 600点耐久，80%伤害吸收
 
-    
+    -- 添加浮动效果
+    MakeInventoryFloatable(inst, "med", 0.05, 0.68)
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
@@ -60,4 +53,4 @@ local function fn()
     return inst
 end
 
-return Prefab("mousse_cat_hat", fn, assets)
+return Prefab("mousse_cat_hat", fn)
