@@ -1,6 +1,6 @@
 -- This information tells other players more about the mod
-name = "慕斯"
-description = "一只可爱猫猫"
+name = "Melantha"
+description = "A mysterious character with unique abilities"
 author = "Desmond&Arthur"
 version = "0.7" -- This is the version of the template. Change it to your own number.
 

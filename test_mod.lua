@@ -1,107 +1,68 @@
--- Test script, used to check if the mod is working properly
-print("=== 慕斯Mod测试脚本 v1.0 (基础版) ===")
+-- 测试mod功能
+print("=== Melantha Mod Test ===")
 
--- 检查环境
-print("1. 检查运行环境...")
-if GLOBAL.TheWorld then
-    if GLOBAL.TheWorld.ismastersim then
-        print("✓ 当前为主服务器")
-        if GLOBAL.TheWorld.topology and GLOBAL.TheWorld.topology.level_id then
-            print("  世界类型: " .. GLOBAL.TheWorld.topology.level_id)
-        else
-            print("  世界类型: 未知")
-        end
-    else
-        print("✓ 当前为客户端")
-    end
-else
-    print("✗ 无法获取世界信息")
-end
-
--- 检查字符串
-print("\n2. 检查字符串...")
-if GLOBAL.STRINGS and GLOBAL.STRINGS.CHARACTER_NAMES and GLOBAL.STRINGS.CHARACTER_NAMES.mousse then
-    print("✓ 角色名称已定义: " .. GLOBAL.STRINGS.CHARACTER_NAMES.mousse)
+-- 检查角色名称是否正确定义
+if GLOBAL.STRINGS and GLOBAL.STRINGS.CHARACTER_NAMES and GLOBAL.STRINGS.CHARACTER_NAMES.melantha then
+    print("✓ 角色名称已定义: " .. GLOBAL.STRINGS.CHARACTER_NAMES.melantha)
 else
     print("✗ 角色名称未定义")
 end
 
-if GLOBAL.STRINGS and GLOBAL.STRINGS.NAMES then
-    if GLOBAL.STRINGS.NAMES.MOUSSE_CAT_ARMOR then
-        print("✓ 护甲名称已定义: " .. GLOBAL.STRINGS.NAMES.MOUSSE_CAT_ARMOR)
-    else
-        print("✗ 护甲名称未定义")
-    end
-    
-    if GLOBAL.STRINGS.NAMES.MOUSSE_CAT_HAT then
-        print("✓ 帽子名称已定义: " .. GLOBAL.STRINGS.NAMES.MOUSSE_CAT_HAT)
-    else
-        print("✗ 帽子名称未定义")
-    end
-    
-    if GLOBAL.STRINGS.NAMES.MOUSSE_ELITE_ITEM then
-        print("✓ 秘药名称已定义: " .. GLOBAL.STRINGS.NAMES.MOUSSE_ELITE_ITEM)
-    else
-        print("✗ 秘药名称未定义")
-    end
+-- 检查护甲名称是否正确定义
+if GLOBAL.STRINGS.NAMES.MELANTHA_CAT_ARMOR then
+    print("✓ 护甲名称已定义: " .. GLOBAL.STRINGS.NAMES.MELANTHA_CAT_ARMOR)
+else
+    print("✗ 护甲名称未定义")
 end
 
--- 检查预制体
-print("\n3. 检查预制体...")
-local prefabs_to_check = {"mousse", "mousse_cat_armor", "mousse_cat_hat", "mousse_elite_item"}
+-- 检查帽子名称是否正确定义
+if GLOBAL.STRINGS.NAMES.MELANTHA_CAT_HAT then
+    print("✓ 帽子名称已定义: " .. GLOBAL.STRINGS.NAMES.MELANTHA_CAT_HAT)
+else
+    print("✗ 帽子名称未定义")
+end
+
+-- 检查秘药名称是否正确定义
+if GLOBAL.STRINGS.NAMES.MELANTHA_ELITE_ITEM then
+    print("✓ 秘药名称已定义: " .. GLOBAL.STRINGS.NAMES.MELANTHA_ELITE_ITEM)
+else
+    print("✗ 秘药名称未定义")
+end
+
+-- 检查武器名称是否正确定义
+if GLOBAL.STRINGS.NAMES.MELANTHA_WEAPON then
+    print("✓ 武器名称已定义: " .. GLOBAL.STRINGS.NAMES.MELANTHA_WEAPON)
+else
+    print("✗ 武器名称未定义")
+end
+
+-- 检查预制体是否正确定义
+local prefabs_to_check = {"melantha", "melantha_cat_armor", "melantha_cat_hat", "melantha_elite_item", "melantha_weapon"}
 for _, prefab_name in ipairs(prefabs_to_check) do
-    if GLOBAL.Prefabs and GLOBAL.Prefabs[prefab_name] then
-        print("✓ " .. prefab_name .. " 预制体已加载")
+    if GLOBAL.Prefabs[prefab_name] then
+        print("✓ 预制体已定义: " .. prefab_name)
     else
-        print("✗ " .. prefab_name .. " 预制体未加载")
+        print("✗ 预制体未定义: " .. prefab_name)
     end
 end
 
--- 检查资源文件
-print("\n4. 检查资源文件...")
+-- 检查资源文件是否存在
 local assets_to_check = {
-    "images/inventoryimages/mousse_cat_armor.xml",
-    "images/inventoryimages/mousse_cat_hat.xml", 
-    "images/inventoryimages/mousse_elite_item.xml",
-    "anim/mousse.zip",
-    "anim/ghost_mousse_build.zip"
+    "images/inventoryimages/melantha_cat_armor.xml",
+    "images/inventoryimages/melantha_cat_hat.xml",
+    "images/inventoryimages/melantha_elite_item.xml",
+    "images/inventoryimages/melantha_weapon.xml",
+    "anim/melantha.zip",
+    "anim/ghost_melantha_build.zip",
+    "anim/swap_melantha_weapon.zip"
 }
 
 for _, asset_path in ipairs(assets_to_check) do
-    -- 这里只是检查路径是否存在，实际加载需要游戏引擎
-    print("  检查资源: " .. asset_path)
+    if GLOBAL.TheSim:FileExists(asset_path) then
+        print("✓ 资源文件存在: " .. asset_path)
+    else
+        print("✗ 资源文件不存在: " .. asset_path)
+    end
 end
 
--- 检查Class是否可用
-print("\n5. 检查Class...")
-if GLOBAL.Class then
-    print("✓ Class 全局变量可用")
-else
-    print("✗ Class 全局变量不可用")
-end
-
--- 检查组件系统
-print("\n6. 检查组件系统...")
-if GLOBAL.Component then
-    print("✓ Component 系统可用")
-else
-    print("✗ Component 系统不可用")
-end
-
--- 检查配方
-print("\n7. 检查配方...")
-if GLOBAL.RECIPETABS then
-    print("✓ 配方标签系统可用")
-else
-    print("✗ 配方标签系统不可用")
-end
-
-if GLOBAL.TECH then
-    print("✓ 科技系统可用")
-else
-    print("✗ 科技系统不可用")
-end
-
-print("\n=== 测试完成 ===")
-print("如果看到 ✗ 标记，说明该功能可能有问题")
-print("建议重启游戏并重新加载mod") 
+print("=== 测试完成 ===") 
